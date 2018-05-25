@@ -2,7 +2,9 @@
  * Create a list that holds all of your cards
  */
 
-const cardList = document.querySelectorAll(".card");
+const cards = document.getElementsByClassName("card");
+const cardList = [...cards];
+//const cardList = [0,1,2,3,4,5,6,7,8,9];
 console.log(cardList);
 
 /*
@@ -23,11 +25,15 @@ function shuffle(array) {
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
     }
-
+    console.log(array)
     return array;
-
 }
+
+
 shuffle(cardList);
+
+
+
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -39,3 +45,5 @@ shuffle(cardList);
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+//const diamondCard = document.querySelector("li < .fa-diamond");
+//console.log(diamondCard);
