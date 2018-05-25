@@ -25,13 +25,16 @@ function shuffle(array) {
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
     }
-    console.log(array)
     return array;
 }
 
-
 shuffle(cardList);
+//loop through each card
+var deck = document
+for (const card of cardList) {
 
+  console.log(card);
+}
 
 
 
