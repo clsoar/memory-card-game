@@ -4,15 +4,6 @@
 
 const cards = document.getElementsByClassName("card");
 const cardList = [...cards];
-//const cardList = [0,1,2,3,4,5,6,7,8,9];
-console.log(cardList);
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -27,15 +18,16 @@ function shuffle(array) {
     }
     return array;
 }
-
-shuffle(cardList);
-//loop through each card
-var deck = document
-for (const card of cardList) {
-
-  console.log(card);
+//shuffle the deck and apply shuffled cards to page
+const deck = document.querySelector(".deck");
+function shuffledDeck(){
+  shuffle(cardList);
+  for (let i = 0; i < cardList.length; i++){
+    let newCardArr = cardList[i];
+    deck.appendChild(newCardArr);
+  }
 }
-
+shuffledDeck();
 
 
 /*
@@ -48,5 +40,48 @@ for (const card of cardList) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
-//const diamondCard = document.querySelector("li < .fa-diamond");
-//console.log(diamondCard);
+//event listener for the cards
+const allCards = document.querySelectorAll(".card");
+var openCards = [];
+
+
+const clickOpen = () => {
+  allCards.forEach(function(card) {
+    card.addEventListener("click", function(e){
+      if (openCards.length < 2){
+        openCards.push(card);
+        console.log("adding card to list");
+        card.classList.add("open", "show");
+        console.log("flipping card");
+        if (openCards.length > 1) {
+          console.log("more than one is open");
+          checkMatch(card);
+        }
+      }
+    });
+  });
+};
+const checkMatch = (card) => {
+    console.log("checking for match")
+    let firstCard = openCards[0].innerHTML;
+    let secondCard = openCards[1].innerHTML;
+    if (firstCard === secondCard){
+      console.log("yes");
+      card.classList.add("match");
+      openCards[0].classList.add("match");
+      openCards = [];
+    } else {
+      setTimeout(function() {
+        openCards.forEach(function(card) {
+          card.classList.remove("open", "show");
+      });
+      openCards = [];
+    }, 1000);
+  }
+
+}
+clickOpen();
+/*if (openCards.length > 1) {
+  console.log("more than one is open");
+  checkMatch();
+}*/
