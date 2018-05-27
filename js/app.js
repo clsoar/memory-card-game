@@ -55,7 +55,8 @@ const clickOpen = () => {
         if (openCards.length > 1) {
           checkMatch(card);
           //add move count here
-          moveCounter(moves);
+          countMove();
+          console.log("moves = " + moves);
         }
       }
     });
@@ -71,9 +72,10 @@ const checkMatch = (card) => {
       openCards[0].classList.add("match");
       openCards = [];
       //add count to matched list
-      matchedList(matches);
-      //matches =+1;
-      console.log(matches);
+      countMatch();
+      //check for game complete
+      checkWin();
+      console.log("matches = " + matches);
     } else {
       setTimeout(function() {
         openCards.forEach(function(card) {
@@ -84,12 +86,20 @@ const checkMatch = (card) => {
   }
 }
 //matched list function
-const matchedList = (matches) => {
-  matches =+ 1;
+const countMatch = () => {
+  return matches += 1;
 }
 //moves counter
-const moveCounter = (moves) => {
-  moves =+ 1;
-  console.log(moves);
+const countMove = () => {
+  return moves += 1;
+}
+const checkWin = () => {
+  if (matches === 8) {
+    //insert congratulations modal function
+    gameWon();
+  }
+}
+const gameWon = () => {
+  //congratulations modal function
 }
 clickOpen();
