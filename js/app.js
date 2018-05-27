@@ -44,23 +44,21 @@ shuffledDeck();
 const allCards = document.querySelectorAll(".card");
 var openCards = [];
 
-
+//flip cards by adding open and show classes
 const clickOpen = () => {
   allCards.forEach(function(card) {
     card.addEventListener("click", function(e){
-      if (openCards.length < 2){
+      if (openCards.length < 2 && !card.classList.contains("open") && !card.classList.contains("show")){
         openCards.push(card);
-        console.log("adding card to list");
         card.classList.add("open", "show");
-        console.log("flipping card");
         if (openCards.length > 1) {
-          console.log("more than one is open");
           checkMatch(card);
         }
       }
     });
   });
 };
+//check flipped cards for match and add match class
 const checkMatch = (card) => {
     console.log("checking for match")
     let firstCard = openCards[0].innerHTML;
