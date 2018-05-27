@@ -40,10 +40,10 @@ shuffledDeck();
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
-//event listener for the cards
+//initialize variables
 const allCards = document.querySelectorAll(".card");
 var openCards = [];
-
+var matches = 0;
 //flip cards by adding open and show classes
 const clickOpen = () => {
   allCards.forEach(function(card) {
@@ -53,6 +53,7 @@ const clickOpen = () => {
         card.classList.add("open", "show");
         if (openCards.length > 1) {
           checkMatch(card);
+          //add move count here
         }
       }
     });
@@ -64,10 +65,13 @@ const checkMatch = (card) => {
     let firstCard = openCards[0].innerHTML;
     let secondCard = openCards[1].innerHTML;
     if (firstCard === secondCard){
-      console.log("yes");
       card.classList.add("match");
       openCards[0].classList.add("match");
       openCards = [];
+      //add count to matched list
+      matchedList();
+      //matches =+1;
+      console.log(matches);
     } else {
       setTimeout(function() {
         openCards.forEach(function(card) {
@@ -76,10 +80,10 @@ const checkMatch = (card) => {
       openCards = [];
     }, 1000);
   }
-
 }
+//matched list function
+const matchedList = () => {
+  matches =+ 1;
+}
+
 clickOpen();
-/*if (openCards.length > 1) {
-  console.log("more than one is open");
-  checkMatch();
-}*/
