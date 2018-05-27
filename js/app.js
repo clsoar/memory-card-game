@@ -44,6 +44,7 @@ shuffledDeck();
 const allCards = document.querySelectorAll(".card");
 var openCards = [];
 var matches = 0;
+var moves = 0;
 //flip cards by adding open and show classes
 const clickOpen = () => {
   allCards.forEach(function(card) {
@@ -54,6 +55,7 @@ const clickOpen = () => {
         if (openCards.length > 1) {
           checkMatch(card);
           //add move count here
+          moveCounter(moves);
         }
       }
     });
@@ -69,7 +71,7 @@ const checkMatch = (card) => {
       openCards[0].classList.add("match");
       openCards = [];
       //add count to matched list
-      matchedList();
+      matchedList(matches);
       //matches =+1;
       console.log(matches);
     } else {
@@ -82,8 +84,12 @@ const checkMatch = (card) => {
   }
 }
 //matched list function
-const matchedList = () => {
+const matchedList = (matches) => {
   matches =+ 1;
 }
-
+//moves counter
+const moveCounter = (moves) => {
+  moves =+ 1;
+  console.log(moves);
+}
 clickOpen();
