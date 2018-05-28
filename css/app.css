@@ -107,3 +107,58 @@ h1 {
     float: right;
     cursor: pointer;
 }
+
+/*
+ * Styles for the Congratulations Modal
+ */
+
+.modal-container {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-direction: column;
+     width: 75%;
+     position: absolute;
+     top: 40%;
+     left: 50%;
+     padding: 20px;
+     border-radius: 10px;
+ }
+
+.winner-hidden  {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     transition: .25s;
+     z-index: -2;
+ }
+
+.winner {
+  background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+  transform:translate(-50%, -50%);
+  z-index: 2;
+}
+
+ h3 {
+     font-family: 'Open Sans', sans-serif;
+     font-weight: 300;
+ }
+
+.modal-container .star-rating{
+    margin: 0;
+    padding: 0;
+}
+
+.modal-container .stars {
+     margin: 0;
+     padding: 0;
+     display: inline-block;
+     margin: 0 5px 20px 0;
+ }
+
+.modal-container .stars li {
+     list-style: none;
+     display: inline-block;
+ }
