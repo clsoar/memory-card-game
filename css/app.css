@@ -162,3 +162,13 @@ h1 {
      list-style: none;
      display: inline-block;
  }
+
+#again {
+  background-color: #02ccba;
+  border: 2px 1px 2px 1px;
+  color: white;
+  padding: 20px 30px;
+  text-align: center;
+  display: inline-block;
+  font-size: 18px;
+}
