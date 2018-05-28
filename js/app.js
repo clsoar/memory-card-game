@@ -113,5 +113,6 @@ const gameWon = () => {
 //update move counter
 const moveCounter = () => {
   counter.textContent = moves;
+  endMoves.textContent = "Moves: " + moves;
 }
 clickOpen();
