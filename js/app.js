@@ -45,6 +45,8 @@ const allCards = document.querySelectorAll(".card");
 var openCards = [];
 var matches = 0;
 var moves = 0;
+const counter = document.querySelector(".moves");
+const endMoves = document.querySelector(".moves-taken");
 //flip cards by adding open and show classes
 const clickOpen = () => {
   allCards.forEach(function(card) {
@@ -57,6 +59,8 @@ const clickOpen = () => {
           checkMatch(card);
           //add a count to moves
           countMove();
+          //update moves on scoreboard
+          moveCounter();
           console.log("moves = " + moves);
         }
       }
@@ -105,5 +109,9 @@ const gameWon = () => {
   let modal = document.querySelector(".modal-container");
   modal.classList.remove("winner-hidden");
   modal.classList.add("winner");
+}
+//update move counter
+const moveCounter = () => {
+  counter.textContent = moves;
 }
 clickOpen();
