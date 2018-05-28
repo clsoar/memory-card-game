@@ -53,8 +53,9 @@ const clickOpen = () => {
         openCards.push(card);
         card.classList.add("open", "show");
         if (openCards.length > 1) {
+          //check for matches
           checkMatch(card);
-          //add move count here
+          //add a count to moves
           countMove();
           console.log("moves = " + moves);
         }
@@ -95,11 +96,14 @@ const countMove = () => {
 }
 const checkWin = () => {
   if (matches === 8) {
-    //insert congratulations modal function
+    //congratulations modal popup
     gameWon();
   }
 }
+//congratulations modal popup function
 const gameWon = () => {
-  //congratulations modal function
+  let modal = document.querySelector(".modal-container");
+  modal.classList.remove("winner-hidden");
+  modal.classList.add("winner");
 }
 clickOpen();
