@@ -46,10 +46,12 @@ var openCards = [];
 var matches = 0;
 var moves = 0;
 const counter = document.querySelector(".moves");
+const modal = document.querySelector(".modal-container");
 const endMoves = document.querySelector(".moves-taken");
 const stars = document.querySelector(".stars").children;
 const starsModal = document.querySelector(".stars-modal").children;
 const restart = document.querySelector(".restart");
+const replay = document.querySelector("#again");
 //flip cards by adding open and show classes
 const clickOpen = () => {
   allCards.forEach(function(card) {
@@ -104,14 +106,13 @@ const countMove = () => {
   return moves += 1;
 }
 const checkWin = () => {
-  if (matches === 8) {
+  if (matches === 1) {
     //congratulations modal popup
     gameWon();
   }
 }
 //congratulations modal popup function
 const gameWon = () => {
-  let modal = document.querySelector(".modal-container");
   modal.classList.remove("winner-hidden");
   modal.classList.add("winner");
 }
@@ -141,21 +142,31 @@ const updateStars = () => {
     }
   }
 }
-//reset function
+const resetBoard = () => {
+  allCards.forEach(function(card) {
+    card.classList.remove("open", "show", "match");
+  });
+  moves = 0;
+  matches = 0;
+  openCards = [];
+  moveCounter();
+  updateStars();
+  //TODO: reset timer
+  shuffledDeck();
+  console.log("reset");
+}
+//reset functions
 const reset = () => {
   restart.addEventListener("click", function () {
-    allCards.forEach(function(card) {
-      card.classList.remove("open", "show", "match");
-    });
-    moves = 0;
-    matches = 0;
-    openCards = [];
-    moveCounter();
-    updateStars();
-    //TODO: reset timer
-    shuffledDeck();
-    console.log("reset");
+    resetBoard();
   });
 }
+const playAgain = () => {
+    replay.addEventListener("click", function () {
+      resetBoard();
+      modal.classList.replace("winner", "winner-hidden");
+    });
+}
+playAgain();
 reset();
 clickOpen();
