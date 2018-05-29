@@ -52,6 +52,9 @@ const stars = document.querySelector(".stars").children;
 const starsModal = document.querySelector(".stars-modal").children;
 const restart = document.querySelector(".restart");
 const replay = document.querySelector("#again");
+const secondCounter = document.querySelector(".seconds");
+const minuteCounter = document.querySelector(".minutes");
+const endGameTime = document.querySelector(".game-time");
 //flip cards by adding open and show classes
 const clickOpen = () => {
   allCards.forEach(function(card) {
@@ -106,7 +109,7 @@ const countMove = () => {
   return moves += 1;
 }
 const checkWin = () => {
-  if (matches === 8) {
+  if (matches === 1) {
     //congratulations modal popup
     gameWon();
   }
@@ -115,6 +118,8 @@ const checkWin = () => {
 const gameWon = () => {
   modal.classList.remove("winner-hidden");
   modal.classList.add("winner");
+  stopTimer();
+  winTime();
 }
 //update move counter
 const moveCounter = () => {
@@ -147,6 +152,7 @@ const resetBoard = () => {
   openCards = [];
   moveCounter();
   updateStars();
+  stopTimer();
   //TODO: reset timer
   shuffledDeck();
   console.log("reset");
@@ -164,18 +170,57 @@ const playAgain = () => {
 //timer
 var startClock = new Date().getTime(),
     elapsedTime = '0';
-
+//format the timer clock on the score panel
+const timerDetail = () => {
+  if (elapsedTime < 60) {
+    if (elapsedTime < 10) {
+      secondCounter.textContent = "0"+elapsedTime;
+    } else if (elapsedTime > 9 && elapsedTime < 60) {
+    secondCounter.textContent = elapsedTime;
+    }
+  } else {
+    let minutes = Math.round(elapsedTime/60);
+    let seconds = Math.round(elapsedTime%60);
+    if (seconds < 10) {
+      secondCounter.textContent = "0"+seconds;
+      minuteCounter.textContent = minutes;
+    }else {
+    secondCounter.textContent = seconds;
+    minuteCounter.textContent = minutes;
+    }
+  }
+}
+//format the timer on the winner popup
+const winTime = () => {
+  if (elapsedTime < 60) {
+    if (elapsedTime < 10) {
+      endGameTime.textContent = "Time: 00:0"+elapsedTime;
+    } else if (elapsedTime > 9 && elapsedTime < 60) {
+        endGameTime.textContent = "Time: 00:"+elapsedTime;
+    }
+  } else {
+    let minutes = Math.round(elapsedTime/60);
+    let seconds = Math.round(elapsedTime%60);
+    if (seconds < 10) {
+      endGameTime.textContent = minutes+":0"+seconds;
+    }else {
+    endGameTime.textContent = minutes+":"+seconds;
+    }
+  }
+}
 const runningTimer = window.setInterval(function() {
     var time = new Date().getTime() - startClock;
-    elapsedTime = Math.floor(time / 100) / 10;
+    elapsedTime = Math.round(Math.floor(time / 100) / 10);
     if(Math.round(elapsedTime) == elapsedTime) {
       elapsedTime += '';
     }
-    document.querySelector(".timer").textContent = elapsedTime;
-
-
-
+    timerDetail();
 }, 1000);
+//stop the timer
+const stopTimer = () => {
+  clearInterval(runningTimer);
+  return elapsedTime;
+}
 
 playAgain();
 reset();
