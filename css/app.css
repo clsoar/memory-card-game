@@ -98,6 +98,12 @@ h1 {
     margin: 0 5px 0 0;
 }
 
+.score-panel #time {
+  display: inline-block;
+  text-align: center;
+  margin-left: 20px;
+}
+
 .score-panel .stars li {
     list-style: none;
     display: inline-block;

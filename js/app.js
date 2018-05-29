@@ -106,7 +106,7 @@ const countMove = () => {
   return moves += 1;
 }
 const checkWin = () => {
-  if (matches === 1) {
+  if (matches === 8) {
     //congratulations modal popup
     gameWon();
   }
@@ -128,16 +128,12 @@ const updateStars = () => {
     stars[1].classList.replace("fa-star-o", "fa-star");
     stars[2].classList.replace("fa-star-o", "fa-star");
   } else {
-    if (moves > 1) {
+    if (moves > 10) {
       stars[2].classList.replace("fa-star", "fa-star-o");
       starsModal[2].classList.replace("fa-star", "fa-star-o");
-      if (moves > 2) {
+      if (moves > 16) {
         stars[1].classList.replace("fa-star", "fa-star-o");
         starsModal[1].classList.replace("fa-star", "fa-star-o");
-        if (moves > 3) {
-          stars[0].classList.replace("fa-star", "fa-star-o");
-          starsModal[0].classList.replace("fa-star", "fa-star-o");
-        }
       }
     }
   }
