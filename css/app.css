@@ -151,14 +151,14 @@ h1 {
     padding: 0;
 }
 
-.modal-container .stars {
+.modal-container .stars-modal {
      margin: 0;
      padding: 0;
      display: inline-block;
      margin: 0 5px 20px 0;
  }
 
-.modal-container .stars li {
+.modal-container .stars-modal li {
      list-style: none;
      display: inline-block;
  }

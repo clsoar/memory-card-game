@@ -47,6 +47,8 @@ var matches = 0;
 var moves = 0;
 const counter = document.querySelector(".moves");
 const endMoves = document.querySelector(".moves-taken");
+const stars = document.querySelector(".stars").children;
+const starsModal = document.querySelector(".stars-modal").children;
 //flip cards by adding open and show classes
 const clickOpen = () => {
   allCards.forEach(function(card) {
@@ -62,6 +64,8 @@ const clickOpen = () => {
           //update moves on scoreboard
           moveCounter();
           console.log("moves = " + moves);
+          //update update stars
+          updateStars();
         }
       }
     });
@@ -99,7 +103,7 @@ const countMove = () => {
   return moves += 1;
 }
 const checkWin = () => {
-  if (matches === 8) {
+  if (matches === 1) {
     //congratulations modal popup
     gameWon();
   }
@@ -114,5 +118,20 @@ const gameWon = () => {
 const moveCounter = () => {
   counter.textContent = moves;
   endMoves.textContent = "Moves: " + moves;
+}
+//update star-rating
+const updateStars = () => {
+  if (moves > 11) {
+    stars[2].classList.replace("fa-star", "fa-star-o");
+    starsModal[2].classList.replace("fa-star", "fa-star-o");
+    if (moves > 15) {
+      stars[1].classList.replace("fa-star", "fa-star-o");
+      starsModal[1].classList.replace("fa-star", "fa-star-o");
+      if (moves > 20) {
+        stars[0].classList.replace("fa-star", "fa-star-o");
+        starsModal[0].classList.replace("fa-star", "fa-star-o");
+      }
+    }
+  }
 }
 clickOpen();
