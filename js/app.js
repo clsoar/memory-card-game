@@ -49,6 +49,7 @@ const counter = document.querySelector(".moves");
 const endMoves = document.querySelector(".moves-taken");
 const stars = document.querySelector(".stars").children;
 const starsModal = document.querySelector(".stars-modal").children;
+const restart = document.querySelector(".restart");
 //flip cards by adding open and show classes
 const clickOpen = () => {
   allCards.forEach(function(card) {
@@ -103,7 +104,7 @@ const countMove = () => {
   return moves += 1;
 }
 const checkWin = () => {
-  if (matches === 1) {
+  if (matches === 8) {
     //congratulations modal popup
     gameWon();
   }
@@ -121,17 +122,40 @@ const moveCounter = () => {
 }
 //update star-rating
 const updateStars = () => {
-  if (moves > 11) {
-    stars[2].classList.replace("fa-star", "fa-star-o");
-    starsModal[2].classList.replace("fa-star", "fa-star-o");
-    if (moves > 15) {
-      stars[1].classList.replace("fa-star", "fa-star-o");
-      starsModal[1].classList.replace("fa-star", "fa-star-o");
-      if (moves > 20) {
-        stars[0].classList.replace("fa-star", "fa-star-o");
-        starsModal[0].classList.replace("fa-star", "fa-star-o");
+  if (moves === 0) {
+    stars[0].classList.replace("fa-star-o", "fa-star");
+    stars[1].classList.replace("fa-star-o", "fa-star");
+    stars[2].classList.replace("fa-star-o", "fa-star");
+  } else {
+    if (moves > 1) {
+      stars[2].classList.replace("fa-star", "fa-star-o");
+      starsModal[2].classList.replace("fa-star", "fa-star-o");
+      if (moves > 2) {
+        stars[1].classList.replace("fa-star", "fa-star-o");
+        starsModal[1].classList.replace("fa-star", "fa-star-o");
+        if (moves > 3) {
+          stars[0].classList.replace("fa-star", "fa-star-o");
+          starsModal[0].classList.replace("fa-star", "fa-star-o");
+        }
       }
     }
   }
 }
+//reset function
+const reset = () => {
+  restart.addEventListener("click", function () {
+    allCards.forEach(function(card) {
+      card.classList.remove("open", "show", "match");
+    });
+    moves = 0;
+    matches = 0;
+    openCards = [];
+    moveCounter();
+    updateStars();
+    //TODO: reset timer
+    shuffledDeck();
+    console.log("reset");
+  });
+}
+reset();
 clickOpen();
