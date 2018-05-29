@@ -153,9 +153,7 @@ const resetBoard = () => {
 }
 //reset functions
 const reset = () => {
-  restart.addEventListener("click", function () {
-    resetBoard();
-  });
+  restart.addEventListener("click", resetBoard);
 }
 const playAgain = () => {
     replay.addEventListener("click", function () {
@@ -163,6 +161,22 @@ const playAgain = () => {
       modal.classList.replace("winner", "winner-hidden");
     });
 }
+//timer
+var startClock = new Date().getTime(),
+    elapsedTime = '0';
+
+const runningTimer = window.setInterval(function() {
+    var time = new Date().getTime() - startClock;
+    elapsedTime = Math.floor(time / 100) / 10;
+    if(Math.round(elapsedTime) == elapsedTime) {
+      elapsedTime += '';
+    }
+    document.querySelector(".timer").textContent = elapsedTime;
+
+
+
+}, 1000);
+
 playAgain();
 reset();
 clickOpen();
