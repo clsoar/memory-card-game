@@ -55,6 +55,7 @@ const replay = document.querySelector("#again");
 const secondCounter = document.querySelector(".seconds");
 const minuteCounter = document.querySelector(".minutes");
 const endGameTime = document.querySelector(".game-time");
+var cardsClicked = 0;
 //flip cards by adding open and show classes
 const clickOpen = () => {
   allCards.forEach(function(card) {
@@ -62,6 +63,11 @@ const clickOpen = () => {
       if (openCards.length < 2 && !card.classList.contains("open") && !card.classList.contains("show")){
         openCards.push(card);
         card.classList.add("open", "show");
+        cardsClicked +=1;
+        if (cardsClicked === 1) {
+          startTimer = new Date().getTime();
+          runningTimer();
+        }
         if (openCards.length > 1) {
           //check for matches
           checkMatch(card);
@@ -153,7 +159,7 @@ const resetBoard = () => {
   moveCounter();
   updateStars();
   stopTimer();
-  //TODO: reset timer
+  resetTime();
   shuffledDeck();
   console.log("reset");
 }
@@ -168,8 +174,9 @@ const playAgain = () => {
     });
 }
 //timer
-var startClock = new Date().getTime(),
-    elapsedTime = '0';
+var time = 0,
+    startTimer = "",
+    elapsedTime = 0;
 //format the timer clock on the score panel
 const timerDetail = () => {
   if (elapsedTime < 60) {
@@ -190,38 +197,48 @@ const timerDetail = () => {
     }
   }
 }
-//format the timer on the winner popup
+//formatting the time taken to win on the winner popup
 const winTime = () => {
   if (elapsedTime < 60) {
     if (elapsedTime < 10) {
       endGameTime.textContent = "Time: 00:0"+elapsedTime;
     } else if (elapsedTime > 9 && elapsedTime < 60) {
-        endGameTime.textContent = "Time: 00:"+elapsedTime;
+        endGameTime.textContent = "Time: 00:" + elapsedTime;
     }
   } else {
     let minutes = Math.round(elapsedTime/60);
     let seconds = Math.round(elapsedTime%60);
     if (seconds < 10) {
-      endGameTime.textContent = minutes+":0"+seconds;
+      endGameTime.textContent = "Time: " + minutes + ":0" + seconds;
     }else {
-    endGameTime.textContent = minutes+":"+seconds;
+    endGameTime.textContent = "Time: " + minutes + ":" + seconds;
     }
   }
 }
-const runningTimer = window.setInterval(function() {
-    var time = new Date().getTime() - startClock;
+const runningTimer = () => {
+  window.setInterval(function() {
+    time = new Date().getTime() - startTimer;
     elapsedTime = Math.round(Math.floor(time / 100) / 10);
     if(Math.round(elapsedTime) == elapsedTime) {
       elapsedTime += '';
     }
     timerDetail();
-}, 1000);
+}, 100);
+}
 //stop the timer
 const stopTimer = () => {
   clearInterval(runningTimer);
   return elapsedTime;
 }
-
+//reset the timer
+const resetTime = () => {
+  time = 0;
+  elapsedTime = 0;
+  cardsClicked = 0;
+  secondCounter.textContent = "00";
+  minuteCounter.textContent = "00";
+  endGameTime.textContent = "Time: 00:00"
+}
 playAgain();
 reset();
 clickOpen();
