@@ -29,17 +29,6 @@ function shuffledDeck(){
 }
 shuffledDeck();
 
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
 //initialize variables
 const allCards = document.querySelectorAll(".card");
 var openCards = [];
@@ -122,7 +111,7 @@ const checkWin = () => {
 }
 //congratulations modal popup function
 const gameWon = () => {
-  modal.classList.remove("winner-hidden");
+  modal.classList.replace("winner-hidden","winner");
   modal.classList.add("winner");
   stopTimer();
   winTime();
@@ -156,6 +145,7 @@ const resetBoard = () => {
   moves = 0;
   matches = 0;
   openCards = [];
+  cardsClicked = 0;
   moveCounter();
   updateStars();
   stopTimer();
@@ -215,8 +205,9 @@ const winTime = () => {
     }
   }
 }
+let runTimer;
 const runningTimer = () => {
-  window.setInterval(function() {
+  runTimer = setInterval(function() {
     time = new Date().getTime() - startTimer;
     elapsedTime = Math.round(Math.floor(time / 100) / 10);
     if(Math.round(elapsedTime) == elapsedTime) {
@@ -227,7 +218,7 @@ const runningTimer = () => {
 }
 //stop the timer
 const stopTimer = () => {
-  clearInterval(runningTimer);
+  clearInterval(runTimer);
   return elapsedTime;
 }
 //reset the timer
@@ -238,6 +229,7 @@ const resetTime = () => {
   secondCounter.textContent = "00";
   minuteCounter.textContent = "00";
   endGameTime.textContent = "Time: 00:00"
+  console.log(elapsedTime);
 }
 playAgain();
 reset();
