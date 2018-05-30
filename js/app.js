@@ -1,9 +1,25 @@
-/*
- * Create a list that holds all of your cards
- */
-
+//initialize variables
+//list that holds all the cards
 const cards = document.getElementsByClassName("card");
 const cardList = [...cards];
+//variable list
+let openCards = [];
+let matches = 0;
+let moves = 0;
+let cardsClicked = 0;
+//list of query selectors to be called
+const allCards = document.querySelectorAll(".card");
+const deck = document.querySelector(".deck");
+const counter = document.querySelector(".moves");
+const modal = document.querySelector(".modal-container");
+const endMoves = document.querySelector(".moves-taken");
+const stars = document.querySelector(".stars").children;
+const starsModal = document.querySelector(".stars-modal").children;
+const restart = document.querySelector(".restart");
+const replay = document.querySelector("#again");
+const secondCounter = document.querySelector(".seconds");
+const minuteCounter = document.querySelector(".minutes");
+const endGameTime = document.querySelector(".game-time");
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -19,7 +35,6 @@ function shuffle(array) {
     return array;
 }
 //shuffle the deck and apply shuffled cards to page
-const deck = document.querySelector(".deck");
 function shuffledDeck(){
   shuffle(cardList);
   for (let i = 0; i < cardList.length; i++){
@@ -29,22 +44,6 @@ function shuffledDeck(){
 }
 shuffledDeck();
 
-//initialize variables
-const allCards = document.querySelectorAll(".card");
-var openCards = [];
-var matches = 0;
-var moves = 0;
-const counter = document.querySelector(".moves");
-const modal = document.querySelector(".modal-container");
-const endMoves = document.querySelector(".moves-taken");
-const stars = document.querySelector(".stars").children;
-const starsModal = document.querySelector(".stars-modal").children;
-const restart = document.querySelector(".restart");
-const replay = document.querySelector("#again");
-const secondCounter = document.querySelector(".seconds");
-const minuteCounter = document.querySelector(".minutes");
-const endGameTime = document.querySelector(".game-time");
-var cardsClicked = 0;
 //flip cards by adding open and show classes
 const clickOpen = () => {
   allCards.forEach(function(card) {
@@ -54,9 +53,11 @@ const clickOpen = () => {
         card.classList.add("open", "show");
         cardsClicked +=1;
         if (cardsClicked === 1) {
+          //start the timer after first card is clicked
           startTimer = new Date().getTime();
           runningTimer();
         }
+        //if more than one card is flipped check for match and update scoreboard
         if (openCards.length > 1) {
           //check for matches
           checkMatch(card);
@@ -64,7 +65,6 @@ const clickOpen = () => {
           countMove();
           //update moves on scoreboard
           moveCounter();
-          console.log("moves = " + moves);
           //update update stars
           updateStars();
         }
@@ -72,7 +72,8 @@ const clickOpen = () => {
     });
   });
 };
-//check flipped cards for match and add match class
+
+//function that checks flipped cards for match and add match class
 const checkMatch = (card) => {
     console.log("checking for match")
     let firstCard = openCards[0].innerHTML;
@@ -95,20 +96,25 @@ const checkMatch = (card) => {
     }, 1000);
   }
 }
+
 //matched list function
 const countMatch = () => {
   return matches += 1;
 }
+
 //moves counter
 const countMove = () => {
   return moves += 1;
 }
+
+//checks for win
 const checkWin = () => {
-  if (matches === 1) {
+  if (matches === 8) {
     //congratulations modal popup
     gameWon();
   }
 }
+
 //congratulations modal popup function
 const gameWon = () => {
   modal.classList.replace("winner-hidden","winner");
@@ -116,11 +122,13 @@ const gameWon = () => {
   stopTimer();
   winTime();
 }
+
 //update move counter
 const moveCounter = () => {
   counter.textContent = moves;
   endMoves.textContent = "Moves: " + moves;
 }
+
 //update star-rating
 const updateStars = () => {
   if (moves === 0) {
@@ -138,6 +146,8 @@ const updateStars = () => {
     }
   }
 }
+
+// function that resets the game
 const resetBoard = () => {
   allCards.forEach(function(card) {
     card.classList.remove("open", "show", "match");
@@ -153,7 +163,8 @@ const resetBoard = () => {
   shuffledDeck();
   console.log("reset");
 }
-//reset functions
+
+//reset functions for scoreboard and winner popup buttons
 const reset = () => {
   restart.addEventListener("click", resetBoard);
 }
@@ -163,8 +174,9 @@ const playAgain = () => {
       modal.classList.replace("winner", "winner-hidden");
     });
 }
+
 //timer
-var time = 0,
+let time = 0,
     startTimer = "",
     elapsedTime = 0;
 //format the timer clock on the score panel
@@ -205,6 +217,8 @@ const winTime = () => {
     }
   }
 }
+/*** Accurate Timer code snippet derived from James Edward's article:
+https://www.sitepoint.com/creating-accurate-timers-in-javascript/***/
 let runTimer;
 const runningTimer = () => {
   runTimer = setInterval(function() {
