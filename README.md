@@ -1,20 +1,24 @@
 # Memory Game Project
 
-## Table of Contents
+## Project 2
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+A memory card game written in HTML, CSS, and JavaScript
 
-## Instructions
+## Instructions for Play
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+16 cards, 8 matching pairs, are randomly distributed on the screen. Click or touch to cards to flip them over and see if they match. Try to match all the cards by successively clicking on cards to find a match. Only two cards will be revealed at once.
 
-To get started, open `js/app.js` and start building out the app's functionality
+A timer starts when the first card is selected. Each pair of flipped cards counts as one move and moves are counted and tallied to affect star rating. 
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+When all the matches are made a congratulatory window will popup and announce the time taken, moves, and star rating. You will also have the option to play again. 
 
-## Contributing
+A reset option is available on the scoreboard to start a new game.
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+## Dependencies
 
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+Google fonts
+fontawesome for icons
+
+## Credits
+Udacity Front-End starter code for HTML and CSS
+Timer function modified from James Edward's article: https://www.sitepoint.com/creating-accurate-timers-in-javascript/
