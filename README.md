@@ -2,7 +2,7 @@
 
 ## Project 2
 
-A memory card game written in HTML, CSS, and JavaScript.
+A memory card game written in HTML, CSS, and JavaScript. Live preview here: https://clsoar.github.io/memory-card-game/
 
 ### Instructions for Play
 
