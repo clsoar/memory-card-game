@@ -16,9 +16,10 @@ A reset option is available on the scoreboard to start a new game.
 
 ### Dependencies
 
-*Google fonts
-*fontawesome for icons
+* Google fonts
+* fontawesome for icons
 
 ### Credits
-*Udacity Front-End starter code for HTML and CSS
-*Timer function modified from James Edward's article: https://www.sitepoint.com/creating-accurate-timers-in-javascript/
+
+* Udacity Front-End starter code for HTML and CSS
+* Timer function modified from James Edward's article: https://www.sitepoint.com/creating-accurate-timers-in-javascript/
