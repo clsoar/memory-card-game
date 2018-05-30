@@ -75,7 +75,6 @@ const clickOpen = () => {
 
 //function that checks flipped cards for match and add match class
 const checkMatch = (card) => {
-    console.log("checking for match")
     let firstCard = openCards[0].innerHTML;
     let secondCard = openCards[1].innerHTML;
     if (firstCard === secondCard){
@@ -86,7 +85,6 @@ const checkMatch = (card) => {
       countMatch();
       //check for game complete
       checkWin();
-      console.log("matches = " + matches);
     } else {
       setTimeout(function() {
         openCards.forEach(function(card) {
@@ -161,7 +159,6 @@ const resetBoard = () => {
   stopTimer();
   resetTime();
   shuffledDeck();
-  console.log("reset");
 }
 
 //reset functions for scoreboard and winner popup buttons
@@ -243,7 +240,6 @@ const resetTime = () => {
   secondCounter.textContent = "00";
   minuteCounter.textContent = "00";
   endGameTime.textContent = "Time: 00:00"
-  console.log(elapsedTime);
 }
 playAgain();
 reset();
